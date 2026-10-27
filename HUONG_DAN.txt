@@ -1,0 +1,16 @@
+WEBSITE LIÊN ĐỘI TÂN CHÂU – BẢN DỄ TẢI LÊN GITHUB
+
+Chỉ cần 3 file để website hoạt động:
+- index.html (trang chủ, đã chứa hình banner và toàn bộ CSS/JS)
+- site-data.json (dữ liệu có thể chỉnh sửa)
+- admin.html (công cụ chỉnh sửa, không có mật khẩu)
+
+1. Vào GitHub repository lien-doi-tanchau/lien-doi-tanchau.
+2. Thay index.html cũ bằng index.html mới; thêm site-data.json và admin.html vào thư mục gốc (cùng cấp).
+3. Nếu GitHub báo tên trùng, mở file cũ, bấm bút chì và thay toàn bộ nội dung, hoặc xóa file cũ rồi upload file mới.
+4. GitHub Settings > Pages > Deploy from a branch > main > /(root).
+5. Chờ triển khai và mở https://lien-doi-tanchau.github.io/lien-doi-tanchau/
+6. Chỉnh nội dung ở /admin.html, xuất site-data.json, thay file JSON trên GitHub và commit.
+
+Không cần tải thư mục assets. Website không còn phụ thuộc đường dẫn hình ảnh.
+Lưu ý: Các mục menu và tin/lịch đã bấm được; chưa có hệ thống tài khoản/mật khẩu hoặc cơ sở dữ liệu quản lý đội viên. Không đăng dữ liệu cá nhân học sinh lên GitHub công khai.

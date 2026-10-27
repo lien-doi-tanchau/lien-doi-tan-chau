@@ -1,4 +1,104 @@
 {
-  "version": 1,
-  "layers": []
+  "stats": {
+    "members": 842,
+    "teams": 25,
+    "campuses": 3,
+    "activities": 12
+  },
+  "news": [
+    {
+      "id": "n1",
+      "title": "Phát động phong trào “Cùng Kun vận động mỗi ngày” năm học 2026 – 2027",
+      "date": "15/10/2026",
+      "image": "kun"
+    },
+    {
+      "id": "n2",
+      "title": "Kế hoạch tổ chức Tết Nhi đồng và Trung thu",
+      "date": "20/09/2026",
+      "image": "trungthu"
+    },
+    {
+      "id": "n3",
+      "title": "Đại hội Liên đội nhiệm kỳ 2026 – 2027",
+      "date": "10/10/2026",
+      "image": "daihoi"
+    }
+  ],
+  "events": [
+    {
+      "id": "e1",
+      "day": "25",
+      "month": "Tháng 9",
+      "title": "Tết Nhi đồng và Trung thu",
+      "time": "18:15 – 19:45",
+      "place": "Sân trường chính"
+    },
+    {
+      "id": "e2",
+      "day": "12",
+      "month": "Tháng 10",
+      "title": "Phát động phong trào “Đọc sách vì tương lai”",
+      "time": "07:15 – 07:30",
+      "place": "Sân trường chính"
+    },
+    {
+      "id": "e3",
+      "day": "17",
+      "month": "Tháng 10",
+      "title": "Đại hội Liên đội nhiệm kỳ 2026 – 2027",
+      "time": "07:30 – 10:30",
+      "place": "Sân trường chính"
+    }
+  ],
+  "sections": {
+    "organization": [
+      {
+        "title": "Tổ chức Liên đội",
+        "detail": "Liên đội Trường Tiểu học Tân Châu – An Giang; 25 chi đội khối 4, 5; 3 điểm trường."
+      }
+    ],
+    "members": [
+      {
+        "title": "Danh sách đội viên",
+        "detail": "842 đội viên toàn Liên đội. Có thể bổ sung danh sách theo lớp tại trang quản trị."
+      }
+    ],
+    "activities": [
+      {
+        "title": "Hoạt động năm học 2026 – 2027",
+        "detail": "Các hoạt động được cập nhật từ kế hoạch công tác Đội."
+      }
+    ],
+    "training": [
+      {
+        "title": "Rèn luyện đội viên",
+        "detail": "Theo dõi nội dung rèn luyện và các hoạt động thực hiện 5 điều Bác Hồ dạy."
+      }
+    ],
+    "awards": [
+      {
+        "title": "Thi đua – Khen thưởng",
+        "detail": "Tổng hợp phong trào thi đua, kết quả và hình thức khen thưởng."
+      }
+    ],
+    "records": [
+      {
+        "title": "Hồ sơ điện tử",
+        "detail": "Danh mục hồ sơ, biên bản, nghị quyết và kế hoạch Liên đội."
+      }
+    ],
+    "reports": [
+      {
+        "title": "Báo cáo – Thống kê",
+        "detail": "Tổng hợp số liệu và báo cáo hoạt động công tác Đội."
+      }
+    ],
+    "documents": [
+      {
+        "title": "Văn bản – Tài liệu",
+        "detail": "Tập hợp văn bản hướng dẫn, tài liệu và biểu mẫu sử dụng trong năm học."
+      }
+    ]
+  }
 }
