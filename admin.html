@@ -1,0 +1,64 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Biên tập giao diện – Liên đội Tân Châu</title><style>
+*{box-sizing:border-box}body{font:15px Arial,sans-serif;margin:0;background:#f3f3f3;color:#17202c}
+header{background:#b9000b;color:white;padding:12px 18px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+button,.btn{cursor:pointer;border:1px solid #ccc;background:white;border-radius:6px;padding:9px 12px;font-weight:600}
+button:hover{background:#fff1cc}header button{color:#9b0000}main{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:12px;padding:12px}
+#canvas{position:relative;width:100%;max-width:1536px;margin:auto;box-shadow:0 0 8px #aaa}
+#base{display:block;width:100%;height:auto}.layer{position:absolute;white-space:pre-wrap;overflow:hidden;overflow-wrap:anywhere;cursor:move;border:1px dashed transparent}
+.layer.selected{outline:2px solid #008cff;border-color:#fff}.layer img{width:100%;height:100%}
+aside{background:white;padding:14px;border-radius:8px;max-height:calc(100vh - 85px);overflow:auto}
+label{display:block;margin:9px 0 4px;font-size:13px;font-weight:600}
+input,textarea,select{width:100%;padding:8px;border:1px solid #bbb;border-radius:5px}
+textarea{height:80px} .two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.note{font-size:13px;line-height:1.5;color:#555}.toolbar{display:flex;gap:6px;flex-wrap:wrap}
+@media(max-width:900px){main{grid-template-columns:1fr}aside{max-height:none}}
+</style></head><body>
+<header><b>QUẢN TRỊ GIAO DIỆN LIÊN ĐỘI TÂN CHÂU</b>
+<button onclick="add('text')">+ Chữ</button><button onclick="add('cover')">+ Nền che</button><button onclick="add('image')">+ Hình ảnh</button><button onclick="add('link')">+ Vùng liên kết</button>
+<button onclick="download()">⬇ Xuất site-data.json</button><button onclick="document.getElementById('import').click()">Nhập JSON</button>
+<input type="file" id="import" accept=".json,application/json" hidden onchange="importFile(this)">
+<a href="./index.html" target="_blank" style="color:white">Xem trang chủ</a>
+</header>
+<main><section><div id="canvas"><img id="base" src="./giao-dien-goc.png" width="1536" height="1024" alt="Giao diện gốc"></div>
+<p class="note">Kéo các đối tượng để di chuyển. Hình gốc luôn được giữ nguyên. Nội dung đã nằm trong ảnh PNG không thể chọn và sửa riêng từng chữ; dùng “Nền che” và “Chữ” để thay thế.</p></section>
+<aside><h3>Chỉnh sửa đối tượng</h3><p id="empty">Chọn một đối tượng trên hình hoặc thêm đối tượng mới.</p><div id="fields" hidden>
+<label>Loại</label><input id="type" disabled>
+<label>Nội dung chữ</label><textarea id="text" oninput="update()"></textarea>
+<label>Đường dẫn hình ảnh (URL hoặc data URI)</label><input id="src" oninput="update()">
+<label>Đường dẫn khi nhấn (URL)</label><input id="url" oninput="update()">
+<div class="two"><div><label>X</label><input id="x" type="number" oninput="update()"></div><div><label>Y</label><input id="y" type="number" oninput="update()"></div><div><label>Rộng</label><input id="w" type="number" oninput="update()"></div><div><label>Cao</label><input id="h" type="number" oninput="update()"></div></div>
+<div class="two"><div><label>Cỡ chữ</label><input id="font" type="number" oninput="update()"></div><div><label>Màu chữ</label><input id="color" type="color" oninput="update()"></div></div>
+<label>Màu nền (CSS, ví dụ #ffffff hoặc transparent)</label><input id="bg" oninput="update()">
+<label><input id="bold" type="checkbox" onchange="update()" style="width:auto"> Chữ đậm</label>
+<div class="toolbar"><button onclick="duplicate()">Nhân bản</button><button onclick="removeSelected()">Xóa đối tượng</button></div></div>
+<hr><p class="note"><b>Lưu và xuất bản:</b> Trình chỉnh sửa lưu bản nháp trên trình duyệt này. Nhấn <b>Xuất site-data.json</b>, sau đó tải file đó lên GitHub để thay thế file cùng tên. Không cần sửa index.html.</p>
+<p class="note"><b>Bảo mật:</b> Đây là trình biên tập tĩnh, không có đăng nhập máy chủ. Không đưa <b>admin.html</b> lên GitHub công khai nếu bạn không muốn người khác mở trình biên tập. Người khác không thể thay đổi website nếu không có quyền ghi vào kho GitHub.</p></aside></main>
+<script>
+const KEY='tanchau-admin-draft-2026-v1',canvas=document.getElementById('canvas');
+let layers=[],selected=-1,drag=null;
+const $=id=>document.getElementById(id);
+const fields=['text','src','url','x','y','w','h','font','color','bg','bold'];
+function save(){localStorage.setItem(KEY,JSON.stringify({version:1,layers}))}
+function load(){const saved=localStorage.getItem(KEY);if(saved){try{layers=JSON.parse(saved).layers||[]}catch{layers=[]}draw();return}
+fetch('./site-data.json',{cache:'no-store'}).then(r=>r.json()).then(d=>{layers=d.layers||[];draw()}).catch(()=>draw())}
+function add(type){let obj={type:type==='link'?'cover':type,x:320,y:230,w:300,h:70,z:layers.length+1,text:'Nội dung mới',src:'',url:'',font:26,color:'#111111',bg:type==='cover'?'#ffffff':type==='link'?'transparent':'transparent',bold:true};
+if(type==='link'){obj.bg='transparent';obj.url='https://example.com'}
+layers.push(obj);selected=layers.length-1;save();draw();showFields()}
+function draw(){canvas.querySelectorAll('.layer').forEach(n=>n.remove());
+layers.forEach((a,i)=>{const el=document.createElement('div');el.className='layer'+(i===selected?' selected':'');el.style.left=a.x/1536*100+'%';el.style.top=a.y/1024*100+'%';el.style.width=a.w/1536*100+'%';el.style.height=a.h/1024*100+'%';el.style.zIndex=a.z||i+1;
+el.style.background=a.bg||'transparent';el.style.color=a.color||'#111';el.style.fontSize='clamp(7px,'+(a.font||24)/1536*100+'vw,48px)';el.style.fontWeight=a.bold?'bold':'normal';
+if(a.type==='text')el.textContent=a.text||'';
+if(a.type==='image'){const img=document.createElement('img');img.src=a.src||'';el.appendChild(img)}
+if(a.type==='cover'&&a.url)el.style.border='1px dashed #ff5500';
+el.onpointerdown=e=>{e.preventDefault();selected=i;drag={i,startX:e.clientX,startY:e.clientY,x:a.x,y:a.y};el.setPointerCapture(e.pointerId);canvas.querySelectorAll(".layer").forEach(n=>n.classList.remove("selected"));el.classList.add("selected");showFields()};
+el.onpointermove=e=>{if(!drag||drag.i!==i||!el.hasPointerCapture(e.pointerId))return;const r=canvas.getBoundingClientRect();a.x=Math.round(Math.max(0,Math.min(1536-a.w,drag.x+(e.clientX-drag.startX)*1536/r.width)));a.y=Math.round(Math.max(0,Math.min(1024-a.h,drag.y+(e.clientY-drag.startY)*1024/r.height)));el.style.left=a.x/1536*100+'%';el.style.top=a.y/1024*100+'%';$('x').value=a.x;$('y').value=a.y};
+el.onpointerup=()=>{drag=null;save()};canvas.appendChild(el)})}
+function showFields(){const a=layers[selected];$('empty').hidden=!!a;$('fields').hidden=!a;if(!a)return;$('type').value=a.type;fields.forEach(k=>{if(k==='bold')$(k).checked=!!a[k];else $(k).value=a[k]??''})}
+function update(){const a=layers[selected];if(!a)return;fields.forEach(k=>a[k]=k==='bold'?$(k).checked:['x','y','w','h','font'].includes(k)?Number($(k).value):$(k).value);save();draw()}
+function removeSelected(){if(selected<0)return;layers.splice(selected,1);selected=-1;save();draw();showFields()}
+function duplicate(){if(selected<0)return;const a=structuredClone(layers[selected]);a.x+=15;a.y+=15;layers.push(a);selected=layers.length-1;save();draw();showFields()}
+function download(){const blob=new Blob([JSON.stringify({version:1,layers},null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='site-data.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
+function importFile(input){const f=input.files[0];if(!f)return;f.text().then(t=>{const d=JSON.parse(t);if(!Array.isArray(d.layers))throw Error('Thiếu layers');layers=d.layers;selected=-1;save();draw();showFields()}).catch(e=>alert('Không thể đọc file JSON: '+e.message))}
+load();
+</script></body></html>
