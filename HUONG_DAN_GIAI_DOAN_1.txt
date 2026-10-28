@@ -1,0 +1,12 @@
+NÂNG CẤP GIAI ĐOẠN 1 – LIÊN ĐỘI TÂN CHÂU
+
+1. Sao lưu GitHub và dữ liệu Supabase trước khi thay file.
+2. Tải các file từ thư mục lien-doi-tan-chau-main lên repository, giữ nguyên đường dẫn.
+3. Mở admin.html, đăng nhập Admin, chọn MỤC 3 – CÁC CHUYÊN MỤC, chọn mục muốn đăng.
+4. Nhấn Thêm nội dung, nhập tiêu đề, soạn bài có căn đều, font, cỡ chữ, bảng, ảnh hoặc nhập Word.
+5. Nhấn Lưu nội dung, sau đó xuống MỤC 4 nhấn Đăng thay đổi lên website.
+6. Mở trang chủ, chọn mục bên trái, chọn tiêu đề bài để xem chi tiết.
+7. PDF/Word: tải tại MỤC 5 – THƯ VIỆN; ở mục Văn bản – Tài liệu công khai có liên kết sang thư viện lọc sẵn tài liệu. Nếu muốn gắn riêng PDF vào bài, dán URL tài liệu vào trường Đường dẫn tài liệu tại MỤC 3.
+8. Kiểm tra quyền Admin, chính sách Storage, thử đăng/sửa/xóa bài trước khi dùng thật.
+
+LƯU Ý: Bản này chưa có tự lưu nháp lên máy chủ, lịch sử phiên bản, thùng rác, trình xem PDF nhúng trong bài và bộ quản lý danh mục động. Không cần SQL mới cho các sửa đổi ở đây. Nút xóa hiện tại xóa khỏi bản nháp, chỉ có hiệu lực công khai sau khi nhấn Đăng thay đổi.

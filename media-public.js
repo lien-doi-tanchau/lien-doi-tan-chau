@@ -1,7 +1,7 @@
 const cfg=window.TANCHAU_AUTH||{}, list=document.getElementById('mediaList'),status=document.getElementById('mediaStatus');
 const search=document.getElementById('search'),filter=document.getElementById('filter');
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-let items=[];
+let items=[];const requestedCategory=new URLSearchParams(location.search).get('category');if(['document','image','audio','video','post'].includes(requestedCategory))filter.value=requestedCategory;
 const safeUrl=url=>{try{const u=new URL(url);return u.protocol==='https:'?u.href:null}catch{return null}};
 function draw(){const q=search.value.toLocaleLowerCase('vi'),cat=filter.value;list.replaceChildren();const matched=items.filter(i=>(!cat||i.category===cat)&&[i.title,i.description,i.school_year].join(' ').toLocaleLowerCase('vi').includes(q));
  for(const item of matched){const card=document.createElement('article');card.className='card';const h=document.createElement('h2');h.textContent=(item.featured?'📌 ':'')+item.title;card.append(h);const meta=document.createElement('p');meta.className='muted';meta.textContent=[{document:'Tài liệu',image:'Hình ảnh',audio:'Âm nhạc',video:'Video',post:'Tin tức'}[item.category],item.school_year,item.month?'Tháng '+item.month:''].filter(Boolean).join(' · ');card.append(meta);if(item.description){const desc=document.createElement('p');desc.textContent=item.description;card.append(desc)}
