@@ -15,8 +15,8 @@ else try {
    const {data,error}=await sb.from('media_library').select('id,title,category,created_at,file_path').order('created_at',{ascending:false}).limit(100);
    if(error){say('Không đọc được thư viện: '+error.message+' — đã chạy SUPABASE_MEDIA.sql chưa?');return;}
    list.replaceChildren();
-   for(const item of data){const div=document.createElement('div');div.className='item';const span=document.createElement('span');span.textContent=item.title+' ('+item.category+') ';const btn=document.createElement('button');btn.textContent='Xóa';btn.onclick=async()=>{
-    if(!confirm('Xóa nội dung "'+item.title+'"?'))return;
+   for(const item of data){const div=document.createElement('div');div.className='item';const span=document.createElement('span');span.textContent=item.title+' ('+item.category+') ';const btn=document.createElement('button');btn.textContent='🗑 Xóa hẳn';btn.style.color='#b00020';btn.onclick=async()=>{
+    if(!confirm('Xóa vĩnh viễn nội dung "'+item.title+'" khỏi thư viện và tệp đính kèm (nếu có)? Thao tác này không thể hoàn tác.'))return;
     if(!await isAdmin()){say('Phiên Admin không hợp lệ.');return;}
     const result=await sb.from('media_library').delete().eq('id',item.id);
     if(result.error){say('Không xóa được: '+result.error.message);return;}

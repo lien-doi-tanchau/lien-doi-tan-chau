@@ -1,0 +1,9 @@
+CẬP NHẬT NÚT XÓA / HỦY CHỈNH SỬA
+1. Trong Admin, chọn Tin tức – Thông báo / Lịch hoạt động hoặc một chuyên mục.
+2. Nhấn tên mục cần sửa để thấy các nút Lưu, Hủy chỉnh sửa, Xóa hẳn.
+3. Xóa chữ: bôi đen và nhấn Delete; nhấn Lưu rồi Đăng thay đổi lên website.
+4. Hủy chỉnh sửa: bỏ nội dung vừa gõ chưa lưu.
+5. Xóa hẳn mục: nhấn nút đỏ viền, xác nhận, rồi nhấn Đăng thay đổi lên website.
+6. Thư viện: phần Nội dung đã đăng có nút Xóa hẳn cho từng tệp; xóa này áp dụng trực tiếp lên Supabase.
+LƯU Ý: Sao lưu site-data.json trước khi xóa hàng loạt.
+PHẦN CHƯA NÂNG CẤP: trình soạn thảo Word và chèn ảnh giữa các đoạn văn cần chỉnh đồng bộ cả giao diện công khai và cấu trúc dữ liệu; không bật vội để tránh hỏng bài viết cũ.
