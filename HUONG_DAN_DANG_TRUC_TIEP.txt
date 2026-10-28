@@ -1,0 +1,16 @@
+NÂNG CẤP ĐĂNG BÀI TRỰC TIẾP – LIÊN ĐỘI TÂN CHÂU
+
+1. Sao lưu mã nguồn hiện tại và file site-data.json.
+2. Vào Supabase > SQL Editor, mở SUPABASE_CONTENT.sql, chạy Run (đúng dự án).
+3. Trên GitHub, tải toàn bộ các file của bản nâng cấp lên repo, giữ nguyên tên và cấu trúc. Commit changes.
+4. Đăng nhập Admin, mở admin.html. Nếu có bản nháp cũ, xem kỹ nội dung.
+5. Nhấn Đăng thay đổi lên website. Lần đầu nút này chuyển toàn bộ dữ liệu đang mở sang Supabase.
+6. Mở trang chủ, tải lại để kiểm tra. Các lần sau chỉ cần sửa và nhấn Đăng thay đổi lên website.
+
+CHÚ Ý
+- Nút Lưu mục này/Lưu số liệu chỉ lưu bản nháp. Phải nhấn Đăng thay đổi lên website.
+- Dữ liệu JSON ban đầu vẫn là bản dự phòng khi Supabase chưa có dữ liệu hoặc lỗi.
+- Chỉ Admin được ghi dữ liệu nhờ chính sách RLS trong Supabase.
+- Chưa hỗ trợ tải ảnh trực tiếp: mục tin tức hiện dùng các biểu tượng minh họa có sẵn.
+- Nếu bảng site_content chưa được tạo, nút Đăng sẽ báo lỗi.
+- Tránh đưa thông tin cá nhân học sinh lên website công khai.
