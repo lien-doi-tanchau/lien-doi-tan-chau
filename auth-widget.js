@@ -10,13 +10,13 @@ style.textContent = `#tc-auth{position:fixed;top:10px;right:12px;z-index:2147483
 #tc-auth-panel{background:#fff;border-radius:15px;width:min(100%,400px);padding:22px;box-shadow:0 10px 35px #0004;color:#152038}
 #tc-auth-panel h2{color:#b9000c;margin:0 0 8px;font-size:22px}
 #tc-auth-panel label{display:block;margin-top:12px;font-weight:bold}
+#tc-auth-panel [hidden]{display:none!important}
 #tc-auth-panel input{display:block;width:100%;box-sizing:border-box;padding:11px;margin-top:5px;border:1px solid #bbb;border-radius:7px}
 #tc-auth-panel button{margin-top:14px;cursor:pointer;border:0;border-radius:7px;padding:11px;background:#c50012;color:#fff;font-weight:bold}
 #tc-auth-panel .secondary{background:#eee;color:#222;margin-left:6px}
 #tc-auth-panel .tc-auth-link{background:transparent;color:#a9000c;padding:4px;margin:8px 8px 0 0;text-decoration:underline}
 #tc-auth-status{margin-top:12px;line-height:1.5;font-size:13px;white-space:pre-line}
 #tc-admin-lock{position:fixed;inset:0;background:#fff;z-index:2147482999;display:flex;align-items:center;justify-content:center;font:16px Arial,sans-serif;text-align:center;padding:30px}
-#tc-view-lock{position:fixed;inset:0;background:#fff;z-index:2147482998;display:flex;align-items:center;justify-content:center;text-align:center;padding:30px;font:16px Arial,sans-serif}
 `;
 document.head.append(style);
 const authRoot = document.createElement('div'); authRoot.id = 'tc-auth';
@@ -41,9 +41,6 @@ const configured = Boolean(cfg.supabaseUrl && cfg.supabaseAnonKey);
 const redirectTo = new URL(location.pathname.replace(/[^/]*$/, '') + 'index.html', location.origin).href;
 let lock;
 if (isAdminPage) { lock = document.createElement('div'); lock.id = 'tc-admin-lock'; lock.textContent = 'Đang xác minh quyền quản trị…'; document.body.append(lock); }
-// This protects the page display only. Files in a public GitHub Pages repository remain public.
-let viewLock;
-if (!isAdminPage) { viewLock = document.createElement('div'); viewLock.id = 'tc-view-lock'; viewLock.textContent = 'Đang kiểm tra đăng nhập…'; document.body.append(viewLock); }
 function status(t) { $('tc-auth-status').textContent = t; }
 function setMode(next) {
  mode = next;
@@ -82,18 +79,9 @@ function showUser() {
  }
 }
 function deny(reason) { if (lock) { lock.replaceChildren(); const d = document.createElement('div'); d.textContent = reason; const b = document.createElement('button'); b.textContent = 'Đăng nhập'; b.style.cssText = 'display:block;margin:16px auto;padding:10px 20px'; b.onclick = () => open(); lock.append(d,b); } }
-function updateViewLock() {
- if (!viewLock) return;
- if (user) { viewLock.remove(); viewLock = null; return; }
- viewLock.replaceChildren();
- const wrap = document.createElement('div');
- const p = document.createElement('p'); p.textContent = 'Vui lòng đăng nhập hoặc đăng ký tài khoản để xem website Liên đội.';
- const b = document.createElement('button'); b.textContent = 'Đăng nhập / Đăng ký'; b.style.cssText = 'background:#a9000c;color:#fff;border:0;border-radius:8px;padding:12px 18px;cursor:pointer'; b.onclick = () => open();
- wrap.append(p,b); viewLock.append(wrap);
-}
 if (!configured) {
  button('Đăng nhập', () => { open(); status('Chưa cấu hình Supabase URL và publishable/anon key trong auth-config.js.'); });
- if (isAdminPage) deny('Chưa cấu hình đăng nhập quản trị.'); else updateViewLock();
+ if (isAdminPage) deny('Chưa cấu hình đăng nhập quản trị.');
 } else {
  try {
   const {createClient} = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm');
@@ -105,7 +93,7 @@ if (!configured) {
     const result = await client.from('profiles').select('role').eq('id',user.id).maybeSingle();
     if (!result.error && result.data?.role === 'admin') role = 'admin';
    }
-   showUser(); updateViewLock();
+   showUser();
    if (isAdminPage) { if (role === 'admin') { lock.remove(); addAccountManager(); } else deny('Chỉ tài khoản Admin mới được vào trang chỉnh sửa.'); }
   }
   $('tc-auth-form').onsubmit = async e => {
@@ -148,7 +136,7 @@ if (!configured) {
   await refresh();
  } catch(e) {
   button('Đăng nhập', () => { open(); status('Không kết nối được dịch vụ xác thực: ' + e.message); });
-  if (isAdminPage) deny('Không thể xác minh quyền Admin.'); else updateViewLock();
+  if (isAdminPage) deny('Không thể xác minh quyền Admin.');
  }
 }
 function addAccountManager() {
