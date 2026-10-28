@@ -1,0 +1,12 @@
+NÂNG CẤP TRUY CẬP NHANH - HÌNH ẢNH - LIÊN KẾT HỮU ÍCH
+
+1. Sao lưu website trước khi thay file.
+2. Đưa toàn bộ file trong thư mục này lên GitHub Pages (giữ nguyên cấu hình Supabase).
+3. Vào admin.html, kéo xuống mục 6: Truy cập nhanh và Liên kết website hữu ích.
+4. Thêm tên + đường dẫn, bấm Lưu danh sách, sau đó bấm Đăng thay đổi lên website ở mục 4.
+5. Mở trang chủ, Ctrl+F5. Ảnh mới nhất được lấy từ Thư viện mục 5 (loại Hình ảnh).
+6. Liên kết nội bộ: #documents, #activities, #news, #calendar, thu-vien.html?category=image, thu-vien.html?category=document.
+7. Liên kết bên ngoài: chỉ dùng https://...
+
+Không cần SQL mới: dữ liệu liên kết lưu trong payload site_content hiện có.
+Chưa xác nhận chức năng trực tiếp trên Supabase thực tế: hãy thử thêm, đăng, sửa, xóa một liên kết.
