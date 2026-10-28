@@ -1,0 +1,10 @@
+NÂNG CẤP THƯ VIỆN ÂM NHẠC – PHIM NGẮN – PPT TRÒ CHƠI
+
+1. Cập nhật toàn bộ mã nguồn lên GitHub Pages.
+2. Nếu Supabase đã chạy SUPABASE_MEDIA.sql trước đây: chạy SUPABASE_PPT_TRO_CHOI.sql một lần. Nếu cài mới: chạy SUPABASE_MEDIA.sql như hướng dẫn trước.
+3. Vào admin.html, đăng nhập Admin, tìm mục 5.
+4. Chọn Âm nhạc (MP3/WAV/OGG), Phim ngắn – Video (MP4/WebM hoặc liên kết HTTPS), hoặc PPT – Trò chơi (.ppt/.pptx).
+5. Điền tiêu đề, mô tả, năm học, tháng; chọn tệp HOẶC nhập liên kết rồi đăng.
+6. Vào thu-vien.html để lọc theo từng chuyên mục.
+
+LƯU Ý: Mỗi nội dung âm nhạc/video/PPT hiện là một tệp hoặc một liên kết; album ảnh hỗ trợ nhiều ảnh. Tệp tối đa 50 MB. PPT được tải xuống để mở trong PowerPoint; chưa có trình chạy hiệu ứng trực tiếp trên web. Video lớn nên dùng liên kết YouTube. Chỉ đăng tài liệu được phép chia sẻ và không chứa dữ liệu riêng tư học sinh.

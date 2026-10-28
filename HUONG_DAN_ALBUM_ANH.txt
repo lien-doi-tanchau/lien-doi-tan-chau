@@ -1,0 +1,10 @@
+HƯỚNG DẪN NÂNG CẤP ALBUM ẢNH
+
+1. Sao lưu website hiện tại.
+2. Đưa tất cả tệp của ZIP mới lên repository GitHub, giữ nguyên auth-config.js đang hoạt động nếu cấu hình thực tế khác.
+3. Vào Supabase > SQL Editor, chạy toàn bộ SUPABASE_ALBUM.sql đúng một lần (sau SUPABASE_MEDIA.sql).
+4. Đăng nhập Admin > mục 5A Album ảnh, nhập tên, mô tả, chọn nhiều ảnh rồi nhấn Đăng toàn bộ album.
+5. Mở thu-vien.html để xem album ảnh công khai.
+6. Ảnh cũ tại mục 5 vẫn được giữ nguyên.
+
+Lưu ý: Tải ảnh nhiều có thể mất thời gian; không đóng trang trong khi tải. Nếu lỗi, hệ thống cố gắng thu hồi album và các tệp đã tải. Chỉ đăng ảnh học sinh được phép công khai.

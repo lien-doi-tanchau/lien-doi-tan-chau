@@ -4,7 +4,7 @@ create table if not exists public.media_library (
  id uuid primary key default gen_random_uuid(),
  title text not null check (char_length(title) between 1 and 250),
  description text not null default '',
- category text not null check (category in ('document','image','audio','video','post')),
+ category text not null check (category in ('document','image','audio','video','presentation','post')),
  school_year text not null default '',
  month int check (month between 1 and 12),
  featured boolean not null default false,
