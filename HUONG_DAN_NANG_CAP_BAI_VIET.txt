@@ -1,0 +1,20 @@
+NÂNG CẤP TRÌNH SOẠN THẢO BÀI VIẾT – LIÊN ĐỘI TÂN CHÂU
+
+1. SAO LƯU: Tải mã nguồn GitHub hiện tại về máy trước khi thay.
+2. Giải nén gói này. Đưa các file bên trong thư mục lien-doi-tan-chau-main lên thư mục gốc repository GitHub, bao gồm file MỚI rich-editor.js, và các file cập nhật admin.html, index.html. Không đưa nguyên thư mục lồng nhau lên GitHub.
+3. Chờ GitHub Pages cập nhật, mở admin.html, tải lại bằng Ctrl+F5 và đăng nhập Admin.
+4. Tin tức – Thông báo hoặc Các chuyên mục: chọn mục cần sửa hoặc Thêm mới.
+5. Trong ô soạn thảo: định dạng chữ, chèn ảnh bằng nút Chèn ảnh, hoặc nhập Word .docx. Có thể chọn ảnh trong bài và nhấn Delete.
+6. Nhấn Xem trước, sau đó Lưu mục này (hoặc Lưu nội dung), cuối cùng Đăng thay đổi lên website. Chỉ lúc này website công khai mới được cập nhật.
+7. Xóa bài: chọn bài > Xóa hẳn > xác nhận > Đăng thay đổi lên website. Nút Hủy chỉnh sửa bỏ các thay đổi chưa lưu.
+
+SQL: Không cần chạy SQL mới nếu SUPABASE_CONTENT.sql và SUPABASE_MEDIA.sql đã chạy trước đây, bucket tanchau-public và quyền Admin upload đã hoạt động.
+
+LƯU Ý:
+- Ảnh trong bài được tải vào Supabase Storage bucket tanchau-public, mỗi ảnh tối đa 10 MB; file Word .docx tối đa 20 MB.
+- Nhập Word hỗ trợ chữ, tiêu đề, danh sách, hình ảnh phổ biến; không đảm bảo giữ y nguyên mọi bố cục Word phức tạp.
+- Thư viện định dạng và nhập Word được tải từ CDN; máy phải có Internet khi soạn.
+- Tệp đã đăng trong bucket công khai có URL công khai. Chỉ dùng ảnh được phép đăng, không đăng thông tin riêng tư của học sinh.
+- Xóa ảnh khỏi bài chỉ gỡ ảnh khỏi nội dung; file ảnh đã tải lên Storage chưa tự động xóa, để tránh xóa nhầm ảnh được sử dụng ở nơi khác.
+- Đừng thay đổi giới hạn file 50 MB của gói Supabase Free; ảnh trong bài nhỏ hơn giới hạn đó.
+- Sau khi cập nhật, kiểm tra thực tế với một bài viết thử và một ảnh thử trước khi sử dụng rộng rãi.
