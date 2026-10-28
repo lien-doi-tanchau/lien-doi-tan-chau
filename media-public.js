@@ -1,0 +1,15 @@
+const cfg=window.TANCHAU_AUTH||{}, list=document.getElementById('mediaList'),status=document.getElementById('mediaStatus');
+const search=document.getElementById('search'),filter=document.getElementById('filter');
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let items=[];
+const safeUrl=url=>{try{const u=new URL(url);return u.protocol==='https:'?u.href:null}catch{return null}};
+function draw(){const q=search.value.toLocaleLowerCase('vi'),cat=filter.value;list.replaceChildren();const matched=items.filter(i=>(!cat||i.category===cat)&&[i.title,i.description,i.school_year].join(' ').toLocaleLowerCase('vi').includes(q));
+ for(const item of matched){const card=document.createElement('article');card.className='card';const h=document.createElement('h2');h.textContent=(item.featured?'📌 ':'')+item.title;card.append(h);const meta=document.createElement('p');meta.className='muted';meta.textContent=[{document:'Tài liệu',image:'Hình ảnh',audio:'Âm nhạc',video:'Video',post:'Tin tức'}[item.category],item.school_year,item.month?'Tháng '+item.month:''].filter(Boolean).join(' · ');card.append(meta);if(item.description){const desc=document.createElement('p');desc.textContent=item.description;card.append(desc)}
+ const url=item.file_path?cfg.supabaseUrl.replace(/\/$/,'')+'/storage/v1/object/public/tanchau-public/'+item.file_path.split('/').map(encodeURIComponent).join('/'):safeUrl(item.external_url);
+ if(url){if(item.category==='image'){const img=document.createElement('img');img.src=url;img.alt=item.title;img.loading='lazy';img.className='preview';card.append(img)}else if(item.category==='audio'){const audio=document.createElement('audio');audio.controls=true;audio.src=url;card.append(audio)}else if(item.category==='video'&&item.file_path){const video=document.createElement('video');video.controls=true;video.src=url;video.className='preview';card.append(video)}
+ const a=document.createElement('a');a.href=url;a.target='_blank';a.rel='noopener noreferrer';a.textContent='Xem / mở tệp';a.className='btn';card.append(a);
+ if(item.allow_download&&item.file_path){const dl=document.createElement('a');dl.href=url;dl.download='';dl.target='_blank';dl.rel='noopener noreferrer';dl.className='btn';dl.textContent='Tải về';card.append(dl)} }
+ list.append(card)}status.textContent=matched.length+' nội dung được tìm thấy.';
+}
+search.addEventListener('input',draw);filter.addEventListener('change',draw);
+try{if(!cfg.supabaseUrl||!cfg.supabaseAnonKey)throw Error('Thiếu cấu hình Supabase');const res=await fetch(cfg.supabaseUrl.replace(/\/$/,'')+'/rest/v1/media_library?select=*&order=featured.desc,created_at.desc&limit=300',{headers:{apikey:cfg.supabaseAnonKey,Accept:'application/json'}});if(!res.ok)throw Error('HTTP '+res.status+' (đã chạy SUPABASE_MEDIA.sql chưa?)');items=await res.json();draw()}catch(err){status.textContent='Chưa tải được thư viện: '+err.message}

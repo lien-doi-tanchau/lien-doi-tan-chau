@@ -1,0 +1,14 @@
+NÂNG CẤP THƯ VIỆN LIÊN ĐỘI TÂN CHÂU
+1. Sao lưu mã nguồn và dữ liệu hiện tại.
+2. Supabase → SQL Editor: chạy toàn bộ SUPABASE_MEDIA.sql một lần. Nếu báo lỗi, dừng và gửi ảnh, không chạy đi chạy lại.
+3. Tải các file trong thư mục này lên ĐÚNG thư mục gốc repository GitHub (không tải cả thư mục bọc ngoài).
+4. Đợi GitHub Pages cập nhật. Đăng nhập Admin → admin.html → mục 5.
+5. Chọn tệp HOẶC dán liên kết, điền tiêu đề rồi bấm Tải lên và đăng công khai.
+6. Kiểm tra thu-vien.html bằng trình duyệt không đăng nhập.
+LƯU Ý:
+- Bucket PUBLIC: mọi tệp có URL đều có thể được tải, dù tắt nút tải. Không dùng cho tài liệu mật.
+- Không đăng ảnh học sinh khi chưa có quyền công bố phù hợp.
+- Chỉ đăng nhạc/video có quyền chia sẻ. Với video lớn ưu tiên YouTube.
+- Mức 50 MB/tệp là trần do cấu hình bucket và giao diện, gói Supabase có thể giới hạn thấp hơn.
+- Đây là bản cần kiểm thử trên dự án Supabase thật; chưa kiểm thử trực tuyến.
+- Chức năng này quản lý thư viện riêng, không thay thế tin tức/lịch hoạt động hiện tại.
