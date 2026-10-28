@@ -1,0 +1,28 @@
+BỔ SUNG ĐĂNG NHẬP CHO WEBSITE LIÊN ĐỘI TÂN CHÂU
+
+GIỮ NGUYÊN GIAO DIỆN
+- index.html và admin.html gốc được giữ nguyên phần nội dung, chỉ thêm 2 script.
+- Các file site-data.json và HUONG_DAN.txt không thay đổi.
+- Nút Đăng nhập được thêm ở góc trên bên phải; người xem vẫn xem trang công khai.
+- Nếu chưa cấu hình Supabase, đăng nhập chưa hoạt động. Trang quản trị được khóa cho tới khi cấu hình.
+
+CÀI ĐẶT XÁC THỰC THẬT
+1. Tạo dự án tại https://supabase.com (tài khoản và dự án của bạn).
+2. Supabase SQL Editor: chạy nội dung SUPABASE_SETUP.sql.
+3. Trong Supabase Project Settings / API lấy Project URL và anon/publishable key.
+4. Điền 2 giá trị vào auth-config.js. KHÔNG dùng service_role/secret key.
+5. Trong Supabase Authentication -> Users: tạo tài khoản admin (email/mật khẩu) và khách.
+6. Chạy một lần trong SQL Editor:
+   update public.profiles set role='admin' where email='EMAIL_ADMIN_CUA_BAN';
+7. Supabase Authentication -> URL Configuration: đặt Site URL thành địa chỉ GitHub Pages.
+8. Upload toàn bộ file trong ZIP lên thư mục gốc của kho GitHub (chọn ghi đè file trùng tên).
+9. Chờ GitHub Pages cập nhật, mở website và nhấn Đăng nhập.
+10. Admin vào admin.html, phía dưới có danh sách tài khoản để đổi quyền khách/admin.
+
+BẢO MẬT VÀ GIỚI HẠN
+- Không đưa mật khẩu vào file HTML, JavaScript hay GitHub.
+- Tài khoản GitHub có quyền ghi kho mới có thể xuất bản thay đổi nội dung.
+- site-data.json vẫn là file công khai: KHÔNG chứa thông tin cá nhân/hồ sơ riêng tư của học sinh.
+- Màn hình đăng nhập bổ sung KHÔNG khóa trang chủ công khai.
+- Phân quyền trên bảng profiles có RLS; dữ liệu công khai của website chưa được chuyển sang cơ sở dữ liệu.
+- Nếu cần khách bắt buộc đăng nhập mới được xem, cần thay đổi kiến trúc và bảo vệ dữ liệu bằng backend/RLS.
